@@ -2,14 +2,27 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
-chart_data = pd.DataFrame(
-     np.random.randn(20, 3),
-     columns=['a', 'b', 'c'])
+st.header('This is a header')
+st.subheader('This is a subheader')
 
-st.line_chart(chart_data)
+code = '''def hello():
+    print("Hello, Streamlit!")'''
 
-map_data = pd.DataFrame(
-    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-    columns=['lat', 'lon'])
+st.code(code, language='python')
 
-st.map(map_data)
+st.text('This is some text')
+
+st.latex(r'''
+     a + ar + a r^2 + a r^3 + \cdots + a r^{n-1} =
+     \sum_{k=0}^{n-1} ar^k =
+     a \left(\frac{1-r^{n}}{1-r}\right)
+     ''')
+
+df = pd.DataFrame(
+	np.random.randn(10, 4),
+	columns=('col %d' % i for i in range(4))
+)
+
+st.table(df)
+
+st.line_chart(df)
